@@ -125,10 +125,63 @@
 
     <form action="lyrics.html" method="get">
       <label for="username">username:</label>
-      <input type="text" id="username" minlength="6" maxlength="100" required />
+      <input
+        type="text"
+        id="username"
+        placeholder="Stupid Rich Man"
+        minlength="6"
+        maxlength="100"
+        required
+      />
+      <br />
       <!-- readonly only read input -->
-      <input type="reset"><input/>
-      <button type="submit">Submit</button>
+      <label for="password">password:</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        minlength="6"
+        maxlength="20"
+        placeholder="******"
+        required
+      />
+      <br />
+      <label for="email">email:</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="squareman@gmail.com"
+      />
+      <br />
+
+      <label for="phone">phone: </label>
+      <input
+        type="tel"
+        name="phone"
+        id="phone"
+        placeholder="0909-123-456"
+        pattern="[0-9]{10}"
+      />
+      <br />
+
+      <label for="bday">birthday: </label>
+      <input type="date" name="bday" id="bday" />
+      <!-- <input type="datetime" name="bday1" id="bday1"> -->
+      <!-- <input type="datetime-local" name="abc" id="abc"> -->
+      <br />
+
+      <label for="quantity">quantity:</label>
+      <input type="number" name="quantity" id="quantity" min="0" max="99" value="1"/>
+      <br />
+
+      <label for="title">title: </label>
+      
+
+      <!-- <input type="url" name="" id=""> -->
+
+      <input type="reset" />
+      <input type="submit" />
     </form>
   </body>
 </html>
