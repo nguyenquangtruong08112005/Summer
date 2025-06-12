@@ -1,24 +1,50 @@
-body {
-    background-color: #545454;
+@font-face {
+    src: url(fonts/Playwrite_IT_Moderna/PlaywriteITModerna-VariableFont_wght.ttf) format('truetype');
+    font-family: 'Playwrite IT Moderna';
 }
+
+@font-face {
+    src: url(fonts/Playwrite_IT_Moderna/static/PlaywriteITModerna-ExtraLight.ttf) format('truetype');
+    font-family: 'Playwrite IT Moderna Extra Light';
+}
+
+@font-face {
+    src: url(fonts/Playwrite_IT_Moderna/static/PlaywriteITModerna-Light.ttf) format('truetype');
+    font-family: 'Playwrite IT Moderna Light';
+}
+@font-face {
+    src: url(fonts/Playwrite_IT_Moderna/static/PlaywriteITModerna-Regular.ttf) format('truetype');
+    font-family: 'Playwrite IT Moderna Regular';
+}
+@font-face {
+    src: url(fonts/Playwrite_IT_Moderna/static/PlaywriteITModerna-Thin.ttf) format('truetype');
+    font-family: 'Playwrite IT Moderna Thin';
+}
+body {
+    background-color: #5a1c3e;
+}
+/* 
 #p1 {
     color: tomato;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
 }
+
 #p2 {
     color: rgb(102, 222, 255);
     font-size: 16px;
     font-weight: normal;
     text-align: center;
 }
+
 #p3 {
     color: #59ff5f;
     font-size: 14px;
     font-weight: normal;
     text-align: center;
 }
+
 #p4 {
     background: linear-gradient(to right, #cebcb8, #1482a4);
     -webkit-background-clip: text;
@@ -27,4 +53,42 @@ body {
     font-size: 12px;
     font-weight: normal;
     text-align: center;
+} */
+
+h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#p1 {
+    font-family: 'Playwrite IT Moderna', sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+}
+#p2 {
+    font-family: 'Playwrite IT Moderna Extra Light', sans-serif;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+#p3 {
+    font-family: 'Playwrite IT Moderna Light', sans-serif;
+    font-size: 0.7em;
+    font-weight: normal;
+}
+#p4 {
+    font-family: 'Playwrite IT Moderna Regular', sans-serif;
+    font-size: 1em;
+    font-weight: normal;
+    background: linear-gradient(to right, #cebcb8, #1482a4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#p5 {
+    font-family: 'Playwrite IT Moderna Thin', sans-serif;
+    font-size: 1em;
+    font-weight: normal;
+    background: linear-gradient(to right, #cebcb8, #1482a4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
