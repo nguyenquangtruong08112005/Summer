@@ -20,9 +20,9 @@
     src: url(fonts/Playwrite_IT_Moderna/static/PlaywriteITModerna-Thin.ttf) format('truetype');
     font-family: 'Playwrite IT Moderna Thin';
 }
-body {
+/* body {
     background-color: #5a1c3e;
-}
+} */
 /* 
 #p1 {
     color: tomato;
@@ -55,7 +55,7 @@ body {
     text-align: center;
 } */
 
-h1 {
+/* h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -91,4 +91,5 @@ h1 {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-}
+} */
+
