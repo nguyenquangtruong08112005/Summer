@@ -1,4 +1,30 @@
 body {
     background-color: #545454;
 }
-
+#p1 {
+    color: tomato;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+#p2 {
+    color: rgb(102, 222, 255);
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+}
+#p3 {
+    color: #59ff5f;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+}
+#p4 {
+    background: linear-gradient(to right, #cebcb8, #1482a4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+}
