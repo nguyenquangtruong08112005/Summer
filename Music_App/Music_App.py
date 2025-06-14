@@ -10,7 +10,7 @@ from pathlib import Path
 from pygame import mixer
 from pystray import Icon, MenuItem as item, Menu
 from PIL import Image
-from tkinter import Tk, filedialog, simpledialog
+from tkinter import Tk, filedialog, simpledialog, Toplevel, Scale, Label, Button, HORIZONTAL
 
 CONFIG_FILE = 'config.json'
 
@@ -97,9 +97,11 @@ class MusicPlayer:
 
     def toggle_shuffle(self):
         self.shuffle = not self.shuffle
+        return self.shuffle
 
     def toggle_repeat(self):
         self.repeat = not self.repeat
+        return self.repeat
 
     def set_volume(self, v):
         self.volume = max(0.0, min(1.0, v))
@@ -114,7 +116,6 @@ class MusicPlayer:
             return
         self.timer_thread = threading.Thread(target=timer, daemon=True)
         self.timer_thread.start()
-
 
 # --- Tray Icon ---
 def create_icon(player):
@@ -141,6 +142,7 @@ def create_icon(player):
         root = Tk()
         root.withdraw()
         folder = filedialog.askdirectory(title="Chọn thư mục nhạc")
+        root.destroy()
         if folder:
             player.set_folder(folder)
             player.play()
@@ -149,12 +151,14 @@ def create_icon(player):
     def set_custom_volume():
         root = Tk()
         root.withdraw()
-        vol_str = simpledialog.askstring("Âm lượng", "Nhập âm lượng (0.0 - 1.0):")
-        try:
-            vol = float(vol_str)
-            player.set_volume(vol)
-        except:
-            pass
+        top = Toplevel(root)
+        top.title("Chỉnh âm lượng")
+        Label(top, text="Âm lượng hiện tại: {:.0f}%".format(player.volume * 100)).pack(pady=5)
+        vol_slider = Scale(top, from_=0, to=100, orient=HORIZONTAL)
+        vol_slider.set(int(player.volume * 100))
+        vol_slider.pack(padx=20, pady=5)
+        Button(top, text="OK", command=lambda: (player.set_volume(vol_slider.get() / 100), top.destroy(), root.destroy())).pack(pady=5)
+        top.mainloop()
 
     def set_timer():
         root = Tk()
@@ -165,40 +169,48 @@ def create_icon(player):
             player.start_sleep_timer(minutes)
         except:
             pass
+        root.destroy()
 
     def on_quit():
         player.stop()
+        icon.visible = False
         icon.stop()
 
-    def on_shuffle():
-        player.toggle_shuffle()
+    def on_shuffle_toggle(icon_item):
+        icon_item.checked = player.toggle_shuffle()
 
-    def on_repeat():
-        player.toggle_repeat()
+    def on_repeat_toggle(icon_item):
+        icon_item.checked = player.toggle_repeat()
 
     icon_menu = Menu(
         item("🗂️ Chọn thư mục", choose_folder),
         item("▶️ Phát / ⏸️ Tạm dừng", on_play_pause),
         item("⏮️ Bài trước", on_prev),
         item("⏭️ Tiếp theo", on_next),
-        item("🔀 Shuffle", on_shuffle),
-        item("🔁 Lặp lại", on_repeat),
+        item("🔀 Shuffle", on_shuffle_toggle, checked=lambda item: player.shuffle),
+        item("🔁 Lặp lại", on_repeat_toggle, checked=lambda item: player.repeat),
         item("🔊 Âm lượng...", set_custom_volume),
         item("⏱️ Hẹn giờ tắt", set_timer),
         item("❌ Thoát", on_quit)
     )
 
-    image = Image.new('RGB', (64, 64), color=(0, 100, 200))
+    icon_path = Path(__file__).parent / "icon.gif"
+    if icon_path.exists():
+        image = Image.open(icon_path)
+    else:
+        image = Image.new('RGB', (64, 64), color=(0, 100, 200))
+
     icon = Icon("Nhạc nền", image, menu=icon_menu)
 
     def monitor():
-        while True:
+        while icon.visible:
             if not mixer.music.get_busy() and player.playing:
                 if player.repeat:
                     player.play()
                 else:
                     player.next()
                 update_tooltip()
+            time.sleep(1.5)
 
     threading.Thread(target=monitor, daemon=True).start()
     update_tooltip()
